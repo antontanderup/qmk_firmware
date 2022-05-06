@@ -259,13 +259,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
             case _MOUSE:
-                // Volume control
-                if (clockwise) {
-                    tap_code(KC_MS_DOWN);
-                } else {
-                    tap_code(KC_MS_UP);
-                }
-                break;
             case _QWERTY:
             case _NUM:
             case _SYM:
