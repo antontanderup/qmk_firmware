@@ -39,6 +39,7 @@ enum layers {
 #define KC_PASTE LCTL(KC_V)
 #define KC_CUT LCTL(KC_X)
 #define KC_UNDO LCTL(KC_Z)
+#define KC_REDO LCTL(LSFT(KC_Z))
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -60,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation
  */
     [_NAV] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     KC_AGAIN, KC_PASTE, KC_COPY, KC_CUT,  KC_UNDO, _______ ,
+      _______, _______, _______, _______, _______, _______,                                     KC_REDO, KC_PASTE, KC_COPY, KC_CUT,  KC_UNDO, _______ ,
       _______, _______, _______, _______, _______, _______,                                     KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_CAPS, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INSERT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -241,11 +242,23 @@ bool oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
+        // RIGHT SIDE ENCODER
+        switch (get_highest_layer(layer_state | default_layer_state)) {
+            case _MEDIA:
+            case _MOUSE:
+            case _QWERTY:
+            case _NUM:
+            case _SYM:
+            case _FUN:
+            case _ADJUST:
+            case _NAV:
+            default:
+                // Redo and undo
+                if (clockwise) {
+                    tap_code16(KC_REDO);
+                } else {
+                    tap_code16(KC_UNDO);
+                }
         }
     } else if (index == 1) {
         // RIGHT SIDE ENCODER
