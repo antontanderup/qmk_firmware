@@ -41,6 +41,9 @@ enum layers {
 #define KC_UNDO LCTL(KC_Z)
 #define KC_REDO LCTL(LSFT(KC_Z))
 
+#define EMOJI LCTL(LGUI(KC_SPACE))
+#define CHANGE_LANGUAGE LGUI(KC_SPACE)
+
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
@@ -52,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
                                                             _______, KC_Q, KC_W, KC_E, KC_R, KC_T,                                            KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LEFT_BRACKET,
-     KC_MS_BTN1, MT(MOD_LGUI, KC_A), MT(MOD_LALT, KC_S), MT(MOD_LCTL, KC_D), MT(MOD_LSFT, KC_F), KC_G,                                        KC_H, MT(MOD_RSFT, KC_J), MT(MOD_RCTL, KC_K), MT(MOD_LALT, KC_L), MT(MOD_RGUI, KC_SCLN),  KC_QUOTE,
-                                        KC_MS_BTN2, MT(MOD_LCTL, KC_Z), KC_X, KC_C, KC_V, KC_B, KC_LBRC, KC_CAPS,                   _______, KC_RBRC, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_MS_BTN2,
-                                     ADJUST, _______, LT(_MEDIA, KC_ESC), LT(_NAV, KC_SPACE), LT(_MOUSE, KC_TAB),                   LT(_SYM, KC_ENTER), LT(_NUM, KC_BACKSPACE), LT(_FUN, KC_DELETE), _______, KC_APP
+     _______, MT(MOD_LGUI, KC_A), MT(MOD_LALT, KC_S), MT(MOD_LCTL, KC_D), MT(MOD_LSFT, KC_F), KC_G,                                        KC_H, MT(MOD_RSFT, KC_J), MT(MOD_RCTL, KC_K), MT(MOD_LALT, KC_L), MT(MOD_RGUI, KC_SCLN),  KC_QUOTE,
+                                        KC_MS_BTN2, MT(MOD_LCTL, KC_Z), KC_X, KC_C, KC_V, KC_B, EMOJI, _______,                     KC_MS_BTN1, KC_MS_BTN2, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, CHANGE_LANGUAGE,
+                                     _______, _______, LT(_MEDIA, KC_ESC), LT(_NAV, KC_SPACE), LT(_MOUSE, KC_TAB),                  LT(_SYM, KC_ENTER), LT(_NUM, KC_BACKSPACE), LT(_FUN, KC_DELETE), _______, _______
     ),
 
  /*
