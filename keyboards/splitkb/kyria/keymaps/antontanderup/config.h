@@ -29,4 +29,4 @@
 // Lets you roll mod-tap keys
 #define IGNORE_MOD_TAP_INTERRUPT
 
-#define OLED_BRIGHTNESS 50
+#define OLED_BRIGHTNESS 20
