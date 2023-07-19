@@ -40,8 +40,5 @@
 
 #define ENCODER_RESOLUTION 2
 
-// Lets you roll mod-tap keys
-#define IGNORE_MOD_TAP_INTERRUPT
-
 #define OLED_BRIGHTNESS 20
 // #define OLED_TIMEOUT 5000
