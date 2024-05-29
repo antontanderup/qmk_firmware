@@ -79,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _______, _______, _______, _______, _______, _______, KC_AGAIN, KC_PASTE, KC_COPY, KC_CUT, KC_UNDO, _______,
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        _______, _______, _______, KC_MS_BTN2, KC_MS_BTN1, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______, _______,
+        _______, _______, _______, _______, _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______, _______,
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, KC_MS_BTN2, KC_MS_BTN1, _______, _______, _______, _______, _______, _______, _______,
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _______, _______, _______, _______, KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, _______
         //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
@@ -254,38 +254,60 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 #ifdef OLED_ENABLE
 
-// static void ctrl(bool on) {
-//     static const char PROGMEM ctrl_off[] = {
-//         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0xF0, 0xF0, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x0F, 0x07, 0x01, 0x01, 0x07, 0x0F, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//     };
-
-//     static const char PROGMEM ctrl_on[] = {
-//         0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, 0x9F, 0x9F, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF9, 0xFC, 0xFF, 0xFF, 0xFC, 0xF9, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F,
-//     };
-
-//     if (on) {
-//         oled_write(ctrl_on, sizeof(ctrl_on));
-//     } else {
-//         oled_write(ctrl_off, sizeof(ctrl_off));
-//     }
-// }
-
-static void render_rebel_alliance_small(void) {
-    static const char PROGMEM my_logo[] = {// 'Rebel_Alliance_logo', 128x24px
-                                           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xe0, 0x10, 0x00, 0x00, 0x00, 0x30, 0x70, 0xfc, 0xfe, 0xfe, 0xfc, 0x70, 0x30, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xe0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xf0, 0xe0, 0xc0, 0xc0, 0xc0, 0xe0, 0xf9, 0xff, 0xff, 0xff, 0xe0, 0xc0, 0xc0, 0xc0, 0xe0, 0xf0, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x1f, 0x3f, 0x3f, 0x7f, 0x7f, 0x7f, 0xff, 0xff, 0xff, 0xff, 0x7f, 0x7f, 0x7f, 0x3f, 0x3f, 0x1f, 0x0f, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
-    oled_write_raw_P(my_logo, sizeof(my_logo));
+static void render_layer_helper(void) {
+    switch (get_highest_layer(layer_state | default_layer_state)) {
+        case _NUM:
+            oled_write_P(PSTR("[   7   8   9   ] \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR(";   4   5   6   = \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("`   1   2   3   \\ \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("        .   0   - \n"), false);
+            break;
+        case _SYM:
+            oled_write_P(PSTR("{   &   *   (   } \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR(":   $   %   ^   + \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("~   !   @   #   | \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("        (   )   _ \n"), false);
+            break;
+        case _FUN:
+            oled_write_P(PSTR("F12 F7 F8 F9 PRT \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("F11 F4 F5 F6 SCRL \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("F10 F1 F2 F3 PAUS \n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("   APP \n"), false);
+            break;
+        case _NAV:
+            oled_write_P(PSTR("RE  ^v  ^c  ^x  ^z\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("<   V   ^   >   CAPS\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("HO  DO  UP  EN  INS\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            break;
+        default:
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            break;
+    }
 }
 
 bool oled_task_user(void) {
     if (!is_keyboard_left()) {
         return false;
     }
-    render_rebel_alliance_small();
-    oled_set_cursor(0, 4);
-    // if (is_keyboard_master()) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR(" ------------------ \n"), false);
     switch (get_highest_layer(layer_state | default_layer_state)) {
@@ -313,6 +335,9 @@ bool oled_task_user(void) {
         case _NAV:
             oled_write_P(PSTR("| NAV     | "), false);
             break;
+        case _GAMING:
+            oled_write_P(PSTR("| GAMING  | "), false);
+            break;
         default:
             oled_write_P(PSTR("| N/A     | "), false);
     }
@@ -320,25 +345,14 @@ bool oled_task_user(void) {
     //  Write host Keyboard LED Status to OLEDs
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_P(led_usb_state.caps_lock ? PSTR("CAPLCK |\n") : PSTR("     - |\n"), false);
-    oled_write_P(led_usb_state.num_lock ? PSTR("| NUMLCK  | ") : PSTR("| -       | "), false);
+    // oled_write_P(led_usb_state.num_lock ? PSTR("| NUMLCK  | ") : PSTR("| -       | "), false);
+    oled_write_P(PSTR("| "), false);
+    oled_write(get_u8_str(get_current_wpm(), '0'), false);
+    oled_write_P(PSTR(" WPM | "), false);
     oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK |\n") : PSTR("     - |\n"), false);
     oled_write_P(PSTR(" ------------------ \n"), false);
-    oled_write_P(PSTR(""), false);
-    oled_write_P(PSTR(" ------------------ \n"), false);
-    oled_write_P(PSTR("|     "), false);
-    oled_write(get_u8_str(get_current_wpm(), '0'), false);
-    oled_write_P(PSTR(" WPM      |\n"), false);
-    oled_write_P(PSTR("| FOR THE REPUBLIC |"), false);
-    oled_write_P(PSTR("  ------------------ \n"), false);
-    // } else {
-    //    oled_set_cursor(0, 4);
-    //    oled_write_P(PSTR(" ------------------ \n"), false);
-    //    oled_write_P(PSTR("|     "), false);
-    //    oled_write(get_u8_str(get_current_wpm(), '0'), false);
-    //    oled_write_P(PSTR(" WPM      |\n"), false);
-    //    oled_write_P(PSTR("| FOR THE REPUBLIC |"), false);
-    //    oled_write_P(PSTR("  ------------------ \n"), false);
-    // }
+    oled_write_P(PSTR("\n"), false);
+    render_layer_helper();
     return false;
 }
 #endif
