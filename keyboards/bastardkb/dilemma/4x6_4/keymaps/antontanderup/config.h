@@ -18,3 +18,5 @@
 #define QP_DC GP11
 #define QP_CS GP12
 #define QP_RESET GP13
+
+#define SPLIT_LAYER_STATE_ENABLE

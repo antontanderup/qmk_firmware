@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_CAPS, _______,
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INSERT, _______,
+        _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INSERT, CG_TOGG,
         // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _______, _______, _______, _______, _______, _______, _______, _______
         //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
@@ -307,52 +307,40 @@ static void render_root_layer(void) {
     }
 }
 
-static void render_tyrell_logo_frame(void) {
-    oled_set_cursor(0, 0);
-    oled_write("|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|", false);
-    oled_set_cursor(0, 1);
-    oled_write_P(PSTR("|                  |\n"), false);
-    oled_write_P(PSTR("|                  |\n"), false);
-    oled_write_P(PSTR("|                  |\n"), false);
-    oled_write_P(PSTR("|                  |\n"), false);
-    oled_write_P(PSTR("|                  |\n"), false);
-    oled_set_cursor(0, 7);
-    oled_write("TYRELL\\___________|", false);
-    oled_set_cursor(0, 0);
-}
-
 bool oled_task_user(void) {
+    render_root_layer();
+    oled_set_cursor(0, 9);
     switch (get_highest_layer(layer_state | default_layer_state)) {
         case _NUM:
-            render_tyrell_logo_frame();
             oled_write_P(PSTR("  [  7  8  9  ]\n\n"), false);
             oled_write_P(PSTR("  ;  4  5  6  =\n\n"), false);
             oled_write_P(PSTR("  `  1  2  3  \\\n\n"), false);
-            oled_write_P(PSTR("        .  0  -\n\n"), false);
+            oled_write_P(PSTR("        .  0  -"), false);
             break;
         case _SYM:
-            render_tyrell_logo_frame();
             oled_write_P(PSTR("  {  &  *  (  }\n\n"), false);
             oled_write_P(PSTR("  :  $  %  ^  +\n\n"), false);
             oled_write_P(PSTR("  ~  !  @  #  |\n\n"), false);
-            oled_write_P(PSTR("        (  )  _\n\n"), false);
+            oled_write_P(PSTR("        (  )  _"), false);
             break;
         case _FUN:
-            render_tyrell_logo_frame();
             oled_write_P(PSTR("F12 F7 F8 F9 PrtSc\n\n"), false);
             oled_write_P(PSTR("F11 F4 F5 F6 ScrLk\n\n"), false);
             oled_write_P(PSTR("F10 F1 F2 F3 Pause\n\n"), false);
-            oled_write_P(PSTR("\n\n"), false);
+            oled_write_P(PSTR("                  "), false);
             break;
         case _NAV:
-            render_tyrell_logo_frame();
             oled_write_P(PSTR("R  V  C   X   Z\n\n"), false);
             oled_write_P(PSTR("<  v  ^   >   Caps\n\n"), false);
             oled_write_P(PSTR("H  Up Dwn End Ins\n\n"), false);
-            oled_write_P(PSTR("\n\n"), false);
+            oled_write_P(PSTR("               "), false);
             break;
         default:
-            render_root_layer();
+            oled_write_P(PSTR("               \n\n"), false);
+            oled_write_P(PSTR("               \n\n"), false);
+            oled_write_P(PSTR("               \n\n"), false);
+            oled_write_P(PSTR("               "), false);
+            break;
     }
     return false;
 }
