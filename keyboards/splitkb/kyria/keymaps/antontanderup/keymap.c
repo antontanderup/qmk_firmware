@@ -323,9 +323,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             default:
                 // Redo and undo
                 if (clockwise) {
-                    tap_code16(KC_REDO);
+                    tap_code16(LGUI(LSFT(KC_Z)));
                 } else {
-                    tap_code16(KC_UNDO);
+                    tap_code16(LGUI(KC_Z));
                 }
         }
     } else if (index == 1) {
