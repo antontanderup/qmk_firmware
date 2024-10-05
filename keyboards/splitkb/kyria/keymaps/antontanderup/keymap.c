@@ -176,6 +176,8 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_
 
 static void render_mods_layer(void) {
 
+    render_bottom_background();
+
     uint8_t mod = get_mods();
 
     if ((mod & MOD_BIT(KC_LSFT)) || (mod & MOD_BIT(KC_RSFT))) {
